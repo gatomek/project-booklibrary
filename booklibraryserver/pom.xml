@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pl.gatomek</groupId>
-    <artifactId>booklib</artifactId>
+    <artifactId>booklibraryserver</artifactId>
     <version>1.0.0</version>
     <name>booklibrary</name>
-    <description>booklibrary</description>
+    <description>booklibrary server</description>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -20,6 +20,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.gatomek</groupId>
+            <artifactId>booklibrarycommon</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>

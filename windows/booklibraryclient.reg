@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\booklibraryclient]
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\booklibraryclient\shell]
+
+[HKEY_CLASSES_ROOT\booklibraryclient\shell\open]
+
+[HKEY_CLASSES_ROOT\booklibraryclient\shell\open\command]
+@="\"C:\\Users\\Tomek\\.jdks\\temurin-21.0.4\\bin\\java.exe\" -DLOG_HOME=D:/myprograms/booklibraryclient -jar \"D:\\myprograms\\booklibraryclient\\booklibraryclient-1.0.0.jar\" \"%1\""
