@@ -31,14 +31,16 @@ From any point, from any application - I want to open the given book.
 * Spring Boot 3 application
 * Server builds database of all files from given book library folder (and subfolders)
 * Book entry consists of two pieces of information: md5 of the content and full file path
-* Usage as windows service via
+* Usage as windows service via [Windows Service Wrapper](https://github.com/winsw/winsw)
+* Server provides REST API for client
 
     java -DLOG_HOME=<log_folder> -Dspring.profiles.active=prod -jar booklibraryserver.jar
 
 ### Client
 
-* simple java application (jar with dependencies - fat jar)
-* client is launched via custom protocol hook
+* Simple java application (jar with dependencies - fat jar)
+* Client is launched via custom protocol hook
+* Client uses server REST API
 
     java -DLOG_HOME=<log_folder> -jar booklibraryclient.jar booklibraryclient://<book_md5> 
 
