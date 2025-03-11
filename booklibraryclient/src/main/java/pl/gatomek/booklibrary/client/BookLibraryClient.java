@@ -25,7 +25,7 @@ public class BookLibraryClient {
 
     private final Properties properties = new Properties();
 
-    public BookLibraryClient() {
+    private BookLibraryClient() {
         loadProperties();
     }
 
@@ -34,7 +34,7 @@ public class BookLibraryClient {
             InputStream resourceAsStream = getClass().getResourceAsStream("/application.properties");
             properties.load(resourceAsStream);
         } catch (IOException ex) {
-            LOGGER.error( ex.getMessage());
+            LOGGER.error(ex.getMessage());
         }
     }
 
@@ -45,16 +45,19 @@ public class BookLibraryClient {
 
     public static void main(String[] args) {
         try {
-            String fileHash = argsToFileHash(args);
             BookLibraryClient client = new BookLibraryClient();
-            client.resolve(fileHash);
+            client.resolve(argsToFileHash(args));
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage());
         }
     }
 
     private String mapToXwwwFormUrlEncoded(Map<String, String> parameters) {
-        return parameters.entrySet().stream().map(e -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8)).collect(Collectors.joining("&"));
+        return parameters
+                .entrySet()
+                .stream()
+                .map(e -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
+                .collect(Collectors.joining("&"));
     }
 
     private void ok(String fileHash, String body) throws IOException {
@@ -92,9 +95,14 @@ public class BookLibraryClient {
         String form = mapToXwwwFormUrlEncoded(parameters);
         String endpoint = properties.getProperty("endpoint");
 
-        HttpRequest req = HttpRequest.newBuilder(new URI(endpoint)).timeout(Duration.ofSeconds(15)).header("Content-Type", "application/x-www-form-urlencoded").POST(HttpRequest.BodyPublishers.ofString(form)).build();
+        HttpRequest req = HttpRequest
+                .newBuilder(new URI(endpoint))
+                .timeout(Duration.ofSeconds(15))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(form))
+                .build();
 
-        try( HttpClient client = HttpClient.newHttpClient()) {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
             switch (response.statusCode()) {
                 case 200:
