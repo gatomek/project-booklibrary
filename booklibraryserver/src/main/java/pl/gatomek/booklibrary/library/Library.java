@@ -1,5 +1,6 @@
 package pl.gatomek.booklibrary.library;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import pl.gatomek.booklibrary.config.BookLibConfig;
@@ -13,18 +14,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Component
 public class Library {
 
     private final BookLibConfig bookLibConfig;
 
     private TreeMap<String, String> archive = new TreeMap<>();
-
-    public Library(BookLibConfig bookLibConfig) {
-        this.bookLibConfig = bookLibConfig;
-
-        reload();
-    }
 
     private String calcMD5FromFileContent(File file) throws IOException {
         Path path = Paths.get(file.toURI());

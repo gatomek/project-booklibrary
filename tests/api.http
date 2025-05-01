@@ -23,3 +23,9 @@ Content-Type: application/x-www-form-urlencoded
 hash = E7FC9185ACB283E62399396E807FE041
 
 ###
+
+### Downloading book by by hash ID
+http://localhost:10000/book/E7FC9185ACB283E62399396E807FE042
+
+####
+
