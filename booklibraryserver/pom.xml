@@ -11,8 +11,6 @@
     <groupId>pl.gatomek</groupId>
     <artifactId>booklibraryserver</artifactId>
     <version>1.0.0</version>
-    <name>booklibrary</name>
-    <description>booklibrary server</description>
     <properties>
         <java.version>21</java.version>
     </properties>
