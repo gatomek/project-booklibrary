@@ -78,7 +78,7 @@ public class Library {
         }
 
         if (filePath != null)
-            return new LibraryItem(hash, filePath);
+            return LibraryItem.of(hash, filePath);
 
         throw new FileNotFoundException(hash);
     }
