@@ -1,0 +1,25 @@
+# REST API level tests
+
+### Resolve Request With Present Resource - upper case letters
+POST http://localhost:10000/resolve
+Content-Type: application/x-www-form-urlencoded
+
+hash = E7FC9185ACB283E62399396E807FE042
+
+###
+
+### Resolve Request With Present Resource - lower case letters
+POST http://localhost:10000/resolve
+Content-Type: application/x-www-form-urlencoded
+
+hash = e7fc9185acb283e62399396e807fe042
+
+###
+
+### Resolve Request With Non-Present Resource
+POST http://localhost:10000/resolve
+Content-Type: application/x-www-form-urlencoded
+
+hash = E7FC9185ACB283E62399396E807FE041
+
+###
