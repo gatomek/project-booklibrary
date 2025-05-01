@@ -69,6 +69,8 @@ public class Library {
     }
 
     public LibraryItem resolve(String hash) throws FileNotFoundException {
+        hash = hash.toUpperCase();
+
         String filePath = archive.get(hash);
         if (filePath == null) {
             reload();
