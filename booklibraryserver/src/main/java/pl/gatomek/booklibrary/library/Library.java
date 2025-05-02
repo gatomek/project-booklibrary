@@ -1,7 +1,7 @@
 package pl.gatomek.booklibrary.library;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import pl.gatomek.booklibrary.config.BookLibConfig;
 import pl.gatomek.booklibrary.dto.LibraryItem;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @RequiredArgsConstructor
-@Component
+@Repository
 public class Library {
 
     private final BookLibConfig bookLibConfig;
@@ -64,8 +64,8 @@ public class Library {
         archive = map;
     }
 
-    public LibraryItem resolve(String hash) throws FileNotFoundException {
-        hash = hash.toUpperCase();
+    public LibraryItem resolve(String fileHash) throws FileNotFoundException {
+        String hash = fileHashAdjustment(fileHash);
 
         String filePath = archive.get(hash);
         if (filePath == null) {
@@ -85,5 +85,24 @@ public class Library {
         for (var e : archive.entrySet())
             list.add(new LibraryItem(e.getKey(), e.getValue()));
         return list;
+    }
+
+    private String fileHashAdjustment(String fileHash) {
+        String hash = upperCaseAdjustment(fileHash);
+        hash = noExtensionAdjustment(hash);
+        return hash;
+    }
+
+    private String upperCaseAdjustment(String fileHash) {
+        return fileHash.toUpperCase();
+    }
+
+    private String noExtensionAdjustment(String fileHash) {
+        if (fileHash.contains(".")) {
+            int dotIndex = fileHash.indexOf(".");
+            return fileHash.substring(0, dotIndex);
+        }
+
+        return fileHash;
     }
 }
